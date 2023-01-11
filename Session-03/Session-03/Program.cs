@@ -5,6 +5,8 @@
         Console.WriteLine("Hello, World!");
 
         Console.ReadLine();
+
+        int i = 10;
          
     }
 }
