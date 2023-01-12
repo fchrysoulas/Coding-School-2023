@@ -27,8 +27,8 @@ internal class Program {
 
         Console.WriteLine(hello + " " + name);
 
-        ProgramOne programOne = new ProgramOne();
-        Console.WriteLine(programOne.HelloName());
+        HelloName helloName = new HelloName();
+        Console.WriteLine(helloName.Get());
 
         Console.ReadLine();
 

@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace Session_04 {
 
-    public class ProgramOne {
+    public class HelloName {
 
 
-        public string HelloName() {
+        public string Get() {
+
+            // 1. Write a C# function to print Hello and your name in the same line. 
 
             string hello = "Hello";
             string name = "Fotis";
