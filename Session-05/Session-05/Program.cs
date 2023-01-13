@@ -5,15 +5,18 @@
         
         Console.WriteLine("Select n");
 
-        string s = Console.ReadLine();
+        
 
         Console.Clear();
 
         
+        string s = Console.ReadLine();
+
         Console.WriteLine("1. Sum");
         Console.WriteLine("2. Product");
 
-         s = Console.ReadLine();
+        s = Console.ReadLine();
+
 
         //if (true) {
 
