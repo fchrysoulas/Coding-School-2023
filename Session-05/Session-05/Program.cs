@@ -2,11 +2,29 @@
 
     private static void Main(string[] args) {
 
-        Console.WriteLine("Hello, World!");
+        
+        Console.WriteLine("Select n");
 
-        Console.ReadLine();
+        string s = Console.ReadLine();
+
+        Console.Clear();
+
         
-        
-        //int j = "";
+        Console.WriteLine("1. Sum");
+        Console.WriteLine("2. Product");
+
+         s = Console.ReadLine();
+
+        //if (true) {
+
+        //    int j = Convert.ToInt32(s);
+
+        //    for (int i = 0; i < j; i++) {
+
+        //    }
+
+        //}
+
+
     }
 }
