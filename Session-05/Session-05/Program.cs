@@ -1,15 +1,14 @@
-﻿internal class Program {
+﻿using Session_05;
+
+internal class Program {
 
     private static void Main(string[] args) {
 
-        
+
         Console.WriteLine("Select n");
-
-        
-
         Console.Clear();
 
-        
+
         string s = Console.ReadLine();
 
         Console.WriteLine("1. Sum");
@@ -17,6 +16,10 @@
 
         s = Console.ReadLine();
 
+
+        Class1 c = new Class1();
+
+        ushort k = (ushort)c.Add(5, 2);
 
         //if (true) {
 
