@@ -5,15 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Session_06 {
-    
-    public class University {
+namespace Session_06.University
+{
+
+    public class University
+    {
 
         public Student[] Students { get; set; }
 
-        public String[] ProfessorNames { get; set; }    
+        public string[] ProfessorNames { get; set; }
 
-        public University() {
+        public University()
+        {
 
             //ProfessorNames = new String[2];
 
@@ -34,7 +37,7 @@ namespace Session_06 {
 
     //public class Entity {
 
-        
+
     //    public Entity() {
     //        ID = Guid.NewGuid(); 
     //    }
@@ -52,7 +55,8 @@ namespace Session_06 {
     //    }
     //}
 
-    public class Person  {
+    public class Person
+    {
 
         // properties
         public Guid ID { get; set; }
@@ -60,38 +64,45 @@ namespace Session_06 {
         public int Age { get; set; }
 
         // constructors
-        public Person() {
+        public Person()
+        {
 
         }
 
-        public Person(Guid id){
+        public Person(Guid id)
+        {
             ID = id;
         }
 
-        public Person(Guid id, string name) {
-            ID = id;
-            Name = name;
-        }
-
-        public Person(Guid id, string name, int age) {
+        public Person(Guid id, string name)
+        {
             ID = id;
             Name = name;
-            Age = age;  
+        }
+
+        public Person(Guid id, string name, int age)
+        {
+            ID = id;
+            Name = name;
+            Age = age;
         }
 
         // methods
-        public void GetName() {
+        public void GetName()
+        {
 
         }
 
-        public void SetName(string name) {
-       
+        public void SetName(string name)
+        {
+
 
         }
 
     }
 
-    public class Student : Person {
+    public class Student : Person
+    {
 
         public int Grade { get; set; }
 
