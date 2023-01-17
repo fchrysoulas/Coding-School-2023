@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Session_07 {
 
-    internal class Class2 {
 
+    public class A { 
+    
+    
+    
+    
     }
+
 }
