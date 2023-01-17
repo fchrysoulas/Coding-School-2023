@@ -10,7 +10,11 @@ namespace Session_07 {
         Convert, 
         Uppercase,
         Reverse
-    } 
+    }
+
+    public class Message { 
+    
+    }
 
     public class MessageLogger { 
     
