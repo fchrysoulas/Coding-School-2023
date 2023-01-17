@@ -7,29 +7,56 @@ using System.Threading.Tasks;
 
 namespace Session_06 {
 
-    public class University {
+    public class Institute {
+
+
+        public Institute() {
+
+        }
+
+        public Institute(int? yearsInService) {
+            // do A
+        }
+
+
+    }
+
+    public class University : Institute {
 
         public Student[] Students { get; set; }
 
-        public string[] ProfessorNames { get; set; }
+        public string?[] ProfessorNames { get; set; }
 
         public University() {
-
-            //ProfessorNames = new String[2];
-
-            //ProfessorNames[0] = "Fotis";
-            //ProfessorNames[1] = "Dimitris";
-
-            //Students = new Student[2];
-
-            //Student alex = new Student();
-            //Student anestis = new Student();
-
-            //Students[0] = alex;
-            //Students[1] = anestis;
-
-
+            Students = new Student[30];
         }
+        
+
+        //public University(Student[] students) {
+
+        //    Students = students;
+          
+        //}
+
+        //public University(int classrooms) {
+
+        //}
+
+        //public University(int? classrooms, int? yearsInService) : base(yearsInService) {
+        //    // do B
+        //}
+
+
+
+
+
+        public void Do(int a) { 
+        
+        }
+
+      
+
+
     }
 
     //public class Entity {
@@ -53,10 +80,10 @@ namespace Session_06 {
     //}
 
     public class Person {
-
+        
         // properties
         public Guid ID { get; set; }
-        public string? Name { get; set; }
+        public string Name { get; set; }
         public int Age { get; set; }
 
         // constructors
@@ -64,24 +91,36 @@ namespace Session_06 {
 
         }
 
-        public Person(Guid id) {
-            ID = id;
-        }
+        //public Person(Guid id) {
+        //    ID = id;
+        //}
 
         public Person(Guid id, string name) {
             ID = id;
             Name = name;
         }
 
-        public Person(Guid id, string name, int age) {
-            ID = id;
-            Name = name;
-            Age = age;
-        }
+        //public Person(Guid id, string name, int age) {
+        //    ID = id;
+        //    Name = name;
+        //    Age = age;
+        //}
 
         // methods
-        public void GetName() {
+        public string? GetName() {
+            try {
 
+                if (Name != null) {
+                    return Name;
+                }
+
+            }
+            catch (Exception) {
+
+                throw;
+            }
+            
+            return null;
         }
 
         public void SetName(string name) {
