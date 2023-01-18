@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Session_07 {
@@ -12,11 +13,6 @@ namespace Session_07 {
         Reverse
     }
 
-   
-
-
-
-
     public class ActionResolver {
 
         // PROPERTIES
@@ -24,7 +20,7 @@ namespace Session_07 {
 
         // CTOR
         public ActionResolver() {
-
+            Logger = new MessageLogger();
         }
 
         // METHODS
@@ -35,23 +31,23 @@ namespace Session_07 {
             response.ResponseID = Guid.NewGuid();
             response.RequestID = request.RequestID;
 
-            MessageLogger logger = new MessageLogger();
+            Log("EXECUTION START");
 
-            Message message = new Message("EXECUTION START");
-            logger.Messages[0] = message;
-            
             try {
 
                 switch (request.Action) {
                     case ActionEnum.Convert:
+                        Log("CONVERT");
                         response.Output = Convert(request.Input);
                         break;
 
                     case ActionEnum.Uppercase:
+                        Log("UPPERCASE");
                         response.Output = Uppercase(request.Input);
                         break;
 
                     case ActionEnum.Reverse:
+                        Log("REVERSE");
                         response.Output = Reverse(request.Input);
                         break;
 
@@ -61,22 +57,33 @@ namespace Session_07 {
                 }
             }
             catch (Exception ex) {
-                Message message2 = new Message(ex.Message);
-                logger.Messages[1] = message2;
+                Log(ex.Message);
+
             }
             finally {
-                Message message3 = new Message("EXECUTION END");
-                logger.Messages[2] = message3;
+                Log("EXECUTION END");
             }
-            
+
 
             return response;
         }
 
-        public string Convert(string input) {
-            // “Convert” you must check if the Input is a decimal number and convert it to binary.
 
-            return string.Empty;
+
+        private void Log(string text) {
+
+            Logger.Write(new Message("------------"));
+
+            Message message = new Message(text); 
+            Logger.Write(message);
+        }
+
+        public string Convert(string input) {
+
+            StringConvert convert = new StringConvert();
+            convert.Text = input;
+
+            return convert.Manipulate();
         }
 
         public string Uppercase(string input) {
@@ -84,7 +91,9 @@ namespace Session_07 {
             // one words(separated by a space), then find the longest word in the
             // Input string and convert it to uppercase.
 
-            return string.Empty;
+            
+
+            return input.ToUpper();
         }
 
         public string Reverse(string input) {
