@@ -16,16 +16,42 @@ namespace Session_07 {
     
     }
 
-    public class MessageLogger { 
-    
+    public class MessageLogger {
+
+        public Message[] Messages { get; set; }
+
+        public MessageLogger() {
+
+        }
+
+
+        public void ReadAll() { 
+        
+        }
+
+        public void Clear() {
+
+        }
+
+        public void Write(Message message) {
+
+        }
+
     }
 
-    public class ActionRequest { 
-    
+    public class ActionRequest {
+
+        public Guid RequestID { get; set; }
+        public string Input { get; set; }
+        public ActionEnum Action { get; set; }
+
     }
 
     public class ActionResponse {
 
+        public Guid RequestID { get; set; }
+        public Guid ResponseID { get; set; }
+        public string Output { get; set; }
     }
 
     public class ActionResolver {
