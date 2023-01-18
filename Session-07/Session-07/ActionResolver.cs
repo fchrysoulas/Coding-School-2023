@@ -12,8 +12,14 @@ namespace Session_07 {
         Reverse
     }
 
-    public class Message { 
-    
+    public class Message {
+
+        public Guid ID { get; set; }
+        public DateTime TimeStamp { get; set; }
+
+        // Change from class diagram: Message property cannot be the same as class name
+        public string Text { get; set; }
+
     }
 
     public class MessageLogger {
@@ -67,8 +73,37 @@ namespace Session_07 {
         // METHODS
         public ActionResponse Execute(ActionRequest request) {
 
+            switch (request.Action) {
+                case ActionEnum.Convert:
+                    Convert();
+                    break;
+
+                case ActionEnum.Uppercase:
+                    Uppercase();
+                    break;
+
+                case ActionEnum.Reverse:
+                    Reverse();
+                    break;
+
+                default:
+                    // TODO: ERRORMESSAGE!
+                    break;
+            }
 
             return null;
+        }
+
+        public void Convert() { 
+        
+        }
+
+        public void Uppercase() { 
+        
+        }
+
+        public void Reverse() {
+
         }
 
 
