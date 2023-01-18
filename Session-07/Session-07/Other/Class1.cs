@@ -5,15 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Session_07.NewWorld {
+namespace Session_07.Other
+{
 
-    public class Shape {
+    public class Shape
+    {
 
         public Color SurfaceColor { get; set; }
 
         public string Name { get; set; }
 
-        public virtual double Surface(double dimension) {
+        public virtual double Surface(double dimension)
+        {
 
             double surface = 0;
             surface = dimension * dimension;
@@ -21,7 +24,8 @@ namespace Session_07.NewWorld {
             return surface;
         }
 
-        public virtual double Surface(double x, double y) {
+        public virtual double Surface(double x, double y)
+        {
 
             double surface = 0;
 
@@ -31,13 +35,16 @@ namespace Session_07.NewWorld {
         }
     }
 
-    public class Circle : Shape {
+    public class Circle : Shape
+    {
 
-        public Circle() {
+        public Circle()
+        {
             Name = "Circle";
         }
 
-        public override double Surface(double dimension) {
+        public override double Surface(double dimension)
+        {
 
             double surface = 0;
             surface = Math.Pow(dimension, 2) * Math.PI;
@@ -46,28 +53,34 @@ namespace Session_07.NewWorld {
         }
     }
 
-    public class Square : Shape {
+    public class Square : Shape
+    {
 
-        public Square() {
+        public Square()
+        {
             Name = "Square";
         }
 
-        public override double Surface(double dimension) {
+        public override double Surface(double dimension)
+        {
             return base.Surface(dimension);
         }
 
     }
 
-    public class Triangle : Shape {
+    public class Triangle : Shape
+    {
 
-        public Triangle() {
+        public Triangle()
+        {
             Name = "Triangle";
         }
 
-        public override double Surface(double dimension) {
+        public override double Surface(double dimension)
+        {
 
             double surface = 0;
-            surface = (dimension * dimension) / 2;
+            surface = dimension * dimension / 2;
 
             return surface;
         }

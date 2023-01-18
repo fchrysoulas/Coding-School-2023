@@ -12,71 +12,10 @@ namespace Session_07 {
         Reverse
     }
 
-    public class Message {
-
-        public Guid ID { get; set; }
-        public DateTime TimeStamp { get; set; }
-
-        // Change from class diagram: Message property cannot be the same as class name
-        public string Text { get; set; }
-
-        public Message() {
-            ID = Guid.NewGuid();    
-        }
-
-        public Message(string text) {
-            ID = Guid.NewGuid();
-            TimeStamp= DateTime.Now;    
-            Text = text;
-        }
-
-    }
-
-    public class MessageLogger {
-
-        public Message[] Messages { get; set; }
-
-        public MessageLogger() {
-            Messages = new Message[1000];
-        }
+   
 
 
-        public void ReadAll() { 
-        
-        }
 
-        public void Clear() {
-
-        }
-
-        public void Write(Message message) {
-
-        }
-
-    }
-
-    public class ActionRequest {
-
-        public Guid RequestID { get; set; }
-        public string Input { get; set; }
-        public ActionEnum Action { get; set; }
-
-        public ActionRequest() {
-            RequestID = Guid.NewGuid();
-        }
-
-    }
-
-    public class ActionResponse {
-
-        public Guid RequestID { get; set; }
-        public Guid ResponseID { get; set; }
-        public string Output { get; set; }
-
-        public ActionResponse() {
-            ResponseID = Guid.NewGuid(); 
-        }
-    }
 
     public class ActionResolver {
 
@@ -98,10 +37,7 @@ namespace Session_07 {
 
             MessageLogger logger = new MessageLogger();
 
-            Message message = new Message();
-            message.Text = "EXECUTION START";
-            message.TimeStamp = DateTime.Now;
-
+            Message message = new Message("EXECUTION START");
             logger.Messages[0] = message;
             
             try {
@@ -125,19 +61,12 @@ namespace Session_07 {
                 }
             }
             catch (Exception ex) {
-                Message message2 = new Message();
-                message2.Text = ex.Message;
-                message2.TimeStamp = DateTime.Now;
-
+                Message message2 = new Message(ex.Message);
                 logger.Messages[1] = message2;
             }
             finally {
-
-                Message message3 = new Message();
-                message3.Text = "EXECUTION END";
-                message3.TimeStamp = DateTime.Now;
-
-                logger.Messages[0] = message3;
+                Message message3 = new Message("EXECUTION END");
+                logger.Messages[2] = message3;
             }
             
 

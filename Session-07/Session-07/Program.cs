@@ -1,6 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Session_07;
-using Session_07.NewWorld;
 
 Console.WriteLine("Hello, World!");
 
