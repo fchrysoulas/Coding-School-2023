@@ -3,9 +3,15 @@
 
     public class Addition {
 
-        public decimal Do(decimal x, decimal y) {
+        public decimal Do(decimal? x, decimal? y) {
 
-            return x + y;
+            decimal ret = 0;
+
+            if (x != null && y != null) {
+                ret = x.Value + y.Value;
+            }
+
+            return ret;
         }
 
     }
