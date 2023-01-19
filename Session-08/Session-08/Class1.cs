@@ -1,43 +1,119 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Session_08 {
 
-    public abstract class Shape {
+    public interface IEntity { 
+    
+    }
 
-        // abstract method
-        public abstract decimal Surface();
+    public interface ICreate {
 
     }
 
+    public interface IShape : IEntity, ICreate {
 
-    public abstract class Circle : Shape {
+        public int Dimension { get; set; }
 
-        public abstract decimal Perimeter();
-
-
-        //public override decimal Surface() {
-
-        //    return 0;
-        //}
+        public void Surface();
     }
 
 
-    public class FotisCircle : Circle {
+    public class Circle : IShape {
 
-        public override decimal Perimeter() {
+        public int Dimension { get; set; }
+        public Color Paint { get; set; }
 
-            return 0;
-        }
-
-        public override decimal Surface() {
-
-            return 0;
+        public void Surface() {
+            
         }
     }
+
+    public class Square : IShape {
+
+        public int Dimension { get; set; }
+        public Color Paint { get; set; }
+
+        public void Surface() {
+
+        }
+    }
+
+    public class Person {
+
+    }
+
+    public class Student : Person {
+
+        public int Z { get; set; }
+
+      
+
+       
+    }
+
+    public class Test {
+
+
+        public void Do() {
+
+
+            Person s = new Student();
+
+            IShape c = new Circle();
+            c.Dimension = 0;
+            c.Surface();
+        
+        }
+
+    }
+
+    //public abstract class Shape {
+
+    //    public int Dimension { get; set; }
+
+    //    public abstract decimal Perimeter();
+
+    //    public void Surface() {
+            
+    //    }
+    //}
+
+
+
+
+
+   
+
+
+    //public abstract class Circle : Shape {
+
+    //    public abstract decimal Perimeter();
+
+
+    //    //public override decimal Surface() {
+
+    //    //    return 0;
+    //    //}
+    //}
+
+
+    //public class FotisCircle : Circle {
+
+    //    public override decimal Perimeter() {
+
+    //        return 0;
+    //    }
+
+    //    public override decimal Surface() {
+
+    //        return 0;
+    //    }
+    //}
 
 
 }
