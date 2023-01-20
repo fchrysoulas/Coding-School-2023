@@ -29,10 +29,20 @@ namespace Session_10.Libs {
 
     }
 
-    public class Student {
+    public class Person {
+
+        public Guid ID { get; set; }
+
+        public Person() {
+            ID = Guid.NewGuid();
+        }
+    }
+
+    public class Student : Person {
 
         public string Name { get; set; }
         public int Age { get; set; }
+
 
     }
 }
