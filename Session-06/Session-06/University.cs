@@ -23,12 +23,12 @@ namespace Session_06 {
 
     public class University : Institute {
 
-        public Student[] Students { get; set; }
+        public List<Student> Students { get; set; }
 
         public string?[] ProfessorNames { get; set; }
 
         public University() {
-            Students = new Student[30];
+            Students = new List<Student>();
         }
         
 
