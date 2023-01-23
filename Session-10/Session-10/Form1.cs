@@ -48,9 +48,9 @@ namespace Session_10
         }
 
         private void btnLoad_Click(object sender, EventArgs e) {
-            
+
             Serializer serializer = new Serializer();
-            
+
             _university = serializer.DeserializeFromFile<University>("university.json");
 
             MessageBox.Show(_university.Name + " Loaded!");
