@@ -69,7 +69,7 @@
             this.grvStudents.Location = new System.Drawing.Point(12, 60);
             this.grvStudents.Name = "grvStudents";
             this.grvStudents.RowTemplate.Height = 25;
-            this.grvStudents.Size = new System.Drawing.Size(776, 241);
+            this.grvStudents.Size = new System.Drawing.Size(776, 204);
             this.grvStudents.TabIndex = 0;
             // 
             // colName
@@ -119,7 +119,7 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(669, 543);
+            this.btnOK.Location = new System.Drawing.Point(669, 602);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(119, 23);
             this.btnOK.TabIndex = 1;
@@ -140,15 +140,18 @@
             // grvStudentCourses
             // 
             this.grvStudentCourses.AllowUserToAddRows = false;
+            this.grvStudentCourses.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grvStudentCourses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grvStudentCourses.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.colSemester});
-            this.grvStudentCourses.Location = new System.Drawing.Point(12, 338);
+            this.grvStudentCourses.Location = new System.Drawing.Point(12, 328);
             this.grvStudentCourses.Name = "grvStudentCourses";
             this.grvStudentCourses.ReadOnly = true;
             this.grvStudentCourses.RowTemplate.Height = 25;
-            this.grvStudentCourses.Size = new System.Drawing.Size(776, 179);
+            this.grvStudentCourses.Size = new System.Drawing.Size(776, 189);
             this.grvStudentCourses.TabIndex = 3;
             // 
             // dataGridViewTextBoxColumn1
@@ -210,17 +213,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 320);
+            this.label1.Location = new System.Drawing.Point(12, 310);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 15);
             this.label1.TabIndex = 8;
             this.label1.Text = "Courses:";
             // 
-            // Form1
+            // StudentsF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 578);
+            this.ClientSize = new System.Drawing.Size(800, 637);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnDeleteCourse);
             this.Controls.Add(this.btnAddCourse);
@@ -230,7 +233,7 @@
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.grvStudents);
-            this.Name = "Form1";
+            this.Name = "StudentsF";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grvStudents)).EndInit();
