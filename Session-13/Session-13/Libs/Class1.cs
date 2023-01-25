@@ -143,9 +143,9 @@ namespace Session_13.Libs {
 
 
         // CLASS FACTORY
-        public T Create<T>(AnimalTypeEnum animalType) where T : new(){
+        public T Create<T>(AnimalTypeEnum animalType) where T : class, new(){
 
-            IAnimal animal = new T();
+            IAnimal animal = Activator.CreateInstance(typeof(T)) as IAnimal;
 
             switch (animalType) {
                 case AnimalTypeEnum.Cat:
@@ -169,7 +169,13 @@ namespace Session_13.Libs {
 
 
 
-            return animal;
+            return (T)animal;
+        }
+    }
+
+    public class MyClass<T> where T : new() {
+        protected T GetObject() {
+            return new T();
         }
     }
 
@@ -181,7 +187,7 @@ namespace Session_13.Libs {
            
             AnimalController controller= new AnimalController();
             
-            Cat cat = (Cat)controller.Create<Cat>(AnimalTypeEnum.Cat);
+            Cat cat = controller.Create<Cat>(AnimalTypeEnum.Cat);
         
         }
     
