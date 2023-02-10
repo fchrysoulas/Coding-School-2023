@@ -50,6 +50,7 @@ public class TodoRepo : IEntityRepo<Todo>
 
         dbTodo.Title = entity.Title;
         dbTodo.Finished = entity.Finished;
+        dbTodo.TodoType = entity.TodoType;
 
         if (entity.Finished) entity.Detail.FinishDate = DateTime.Now;
 

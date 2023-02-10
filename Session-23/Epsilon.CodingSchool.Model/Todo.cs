@@ -16,8 +16,17 @@ public class Todo : EntityBase
 
     public bool Finished { get; set; }
 
+    public TodoType TodoType { get; set; }
+
     // Relations
     public TodoDetail Detail { get; set; }
 
     public ICollection<TodoComment> Comments { get; set; }
+}
+
+public enum TodoType
+{
+    Other,
+    Shopping,
+    Cook
 }

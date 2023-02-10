@@ -43,6 +43,7 @@ public class TodoCommentRepo : IEntityRepo<TodoComment>, ITodoCommentRepo
             throw new KeyNotFoundException($"Given id '{id}' was not found in database");
 
         dbTodoComment.Text = entity.Text;
+        dbTodoComment.TodoId = entity.TodoId;
         context.SaveChanges();
     }
 

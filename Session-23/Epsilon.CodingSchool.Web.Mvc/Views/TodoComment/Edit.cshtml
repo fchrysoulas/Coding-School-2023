@@ -1,5 +1,4 @@
-﻿@using Epsilon.CodingSchool.Model;
-@model TodoEditDto
+﻿@model TodoCommentEditDto
 
 @{
     ViewData["Title"] = "Edit";
@@ -7,20 +6,21 @@
 
 <h1>Edit</h1>
 
-<h4>Todo</h4>
+<h4>TodoComment</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label asp-for="Text" class="control-label"></label>
+                <input asp-for="Text" class="form-control" />
+                <span asp-validation-for="Text" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TodoType" class="control-label"></label>
-                <select asp-for="TodoType" class="form-control" asp-items="Html.GetEnumSelectList<TodoType>()"></select>
+                <label asp-for="TodoId" class="control-label"></label>
+                <select asp-for="TodoId" class="form-control" asp-items="@Model.Todos"></select>
+                <span asp-validation-for="TodoId" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -35,7 +35,5 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

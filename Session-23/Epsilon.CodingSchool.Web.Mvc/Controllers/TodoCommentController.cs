@@ -65,16 +65,50 @@ namespace Epsilon.CodingSchool.Web.Mvc.Controllers
         // GET: TodoCommentController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var dbTodoComment = _todoCommentRepo.GetById(id);
+            if (dbTodoComment == null)
+            {
+                return NotFound();
+            }
+
+            var todoCommentDto = new TodoCommentEditDto
+            {
+                Text = dbTodoComment.Text,
+                TodoId = dbTodoComment.TodoId,
+                Id = dbTodoComment.Id
+            };
+
+            var todos = _todoRepo.GetAll();
+            foreach (var todo in todos)
+            {
+                todoCommentDto.Todos.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(todo.Title, todo.Id.ToString()));
+            }
+
+            return View(todoCommentDto);
         }
 
         // POST: TodoCommentController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, TodoCommentEditDto todoComment)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View();
+                }
+
+                var dbTodoComment = _todoCommentRepo.GetById(id);
+                if (dbTodoComment == null)
+                {
+                    return NotFound();
+                }
+
+                dbTodoComment.Text = todoComment.Text;
+                dbTodoComment.TodoId = todoComment.TodoId;
+
+                _todoCommentRepo.Update(id, dbTodoComment);
                 return RedirectToAction(nameof(Index));
             }
             catch

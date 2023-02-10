@@ -65,6 +65,7 @@ namespace Epsilon.CodingSchool.Web.Mvc.Controllers
             }
 
             var dbTodo = new Todo(todo.Title);
+            dbTodo.TodoType = todo.TodoType;
             _todoRepo.Add(dbTodo);
             return RedirectToAction("Index");
         }
@@ -81,7 +82,8 @@ namespace Epsilon.CodingSchool.Web.Mvc.Controllers
             var viewTodo = new TodoEditDto
             {
                 Title = dbTodo.Title,
-                Id = dbTodo.Id
+                Id = dbTodo.Id,
+                TodoType = dbTodo.TodoType
             };
             return View(model: viewTodo);
         }
@@ -103,6 +105,7 @@ namespace Epsilon.CodingSchool.Web.Mvc.Controllers
             }
 
             dbTodo.Title = todo.Title;
+            dbTodo.TodoType = todo.TodoType;
             _todoRepo.Update(id, dbTodo);
             return RedirectToAction(nameof(Index));
         }
