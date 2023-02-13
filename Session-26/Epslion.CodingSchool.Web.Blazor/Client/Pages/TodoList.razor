@@ -1,0 +1,27 @@
+﻿@page "/todolist"
+
+<h3>TodoList @(todoList.Count(x=> !x.Finished))</h3>
+
+<input @bind="newTodoItemTitle" placeholder="New item ..." />
+<button class="btn btn-primary" @onclick="OnAddClick" >Add</button>
+<ul>
+    @foreach(var todoItem in todoList)
+    {
+        <li><input @bind="todoItem.Title"/> 
+            <input @bind=todoItem.Finished type="checkbox"/> </li>
+    }
+</ul>
+
+@code {
+    private List<TodoListDto> todoList = new ();
+    private string newTodoItemTitle;
+
+    private void OnAddClick()
+    {
+        todoList.Add(new TodoListDto
+        {
+            Title = newTodoItemTitle
+        });
+        newTodoItemTitle = null;
+    }
+}
