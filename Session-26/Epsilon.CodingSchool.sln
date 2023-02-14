@@ -11,11 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epsilon.CodingSchool.Model"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epsilon.CodingSchool.Web.Mvc", "Epsilon.CodingSchool.Web.Mvc\Epsilon.CodingSchool.Web.Mvc.csproj", "{CD147F2A-FED1-4F0E-B7D3-7D138740780A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epslion.CodingSchool.Web.Blazor.Server", "Epslion.CodingSchool.Web.Blazor\Server\Epslion.CodingSchool.Web.Blazor.Server.csproj", "{C3CB428D-6103-4178-A225-9D991309DD0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epslion.CodingSchool.Web.Blazor.Server", "Epslion.CodingSchool.Web.Blazor\Server\Epslion.CodingSchool.Web.Blazor.Server.csproj", "{C3CB428D-6103-4178-A225-9D991309DD0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epslion.CodingSchool.Web.Blazor.Client", "Epslion.CodingSchool.Web.Blazor\Client\Epslion.CodingSchool.Web.Blazor.Client.csproj", "{9400F603-D828-483A-9C1C-29EBE2261F85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epslion.CodingSchool.Web.Blazor.Client", "Epslion.CodingSchool.Web.Blazor\Client\Epslion.CodingSchool.Web.Blazor.Client.csproj", "{9400F603-D828-483A-9C1C-29EBE2261F85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epslion.CodingSchool.Web.Blazor.Shared", "Epslion.CodingSchool.Web.Blazor\Shared\Epslion.CodingSchool.Web.Blazor.Shared.csproj", "{45D5A3FD-34E4-4020-866E-F46B2EC57E7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epslion.CodingSchool.Web.Blazor.Shared", "Epslion.CodingSchool.Web.Blazor\Shared\Epslion.CodingSchool.Web.Blazor.Shared.csproj", "{45D5A3FD-34E4-4020-866E-F46B2EC57E7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

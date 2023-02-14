@@ -1,3 +1,5 @@
+using Epsilon.CodingSchool.EF.Repository;
+using Epsilon.CodingSchool.Model;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<IEntityRepo<Todo>, TodoRepo>();
 
 var app = builder.Build();
 

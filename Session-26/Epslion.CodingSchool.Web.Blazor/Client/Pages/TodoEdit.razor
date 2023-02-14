@@ -1,0 +1,90 @@
+﻿@page "/todolist/edit/{Id:int?}"
+@using Epsilon.CodingSchool.Model;
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+<h3>TodoEdit</h3>
+
+@if(Todo == null)
+{
+    <p>Loading ...</p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-6">
+            <label class="form-label">Title</label>
+            <input class="form-control" @bind="@Todo.Title" />
+        </div>
+        @if(Id != null)
+        {
+            <div class="col-md-6">
+                <label class="form-label">Finished</label>
+                <input class="form-check" type="checkbox" @bind="@Todo.Finished" />
+            </div>
+        }
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label class="form-label">Todo Type</label>
+            <select class="form-control" @bind="Todo.TodoType">
+               @* <option value="@TodoType.Other">Other</option>
+                <option value="@TodoType.Shopping">Shopping</option>
+                <option value="@TodoType.Cook">Cook</option>*@
+
+                @foreach(var enumValue in Enum.GetValues<TodoType>())
+                {
+                    <option value="@enumValue">@enumValue</option>
+                }
+
+            </select>
+        </div>
+
+    </div>
+
+    <div class="row mt-2">
+        <div class="col">
+            <button class="btn btn-success" @onclick="OnSave">Save</button>
+            <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
+        </div>
+
+    </div>
+}
+
+
+@code {
+    [Parameter] public int? Id { get; set; }
+    TodoEditDto Todo { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if(Id == null)
+        {
+            Todo = new();
+        }
+        else
+        {
+            Todo = await httpClient.GetFromJsonAsync<TodoEditDto>($"todo/{Id}");
+        }
+    }
+
+    private void OnCancel()
+    {
+        navigationManager.NavigateTo("todolist");
+    }
+
+    private async Task OnSave()
+    {
+        HttpResponseMessage? response = null;
+        if(Id == null)
+        {
+            response = await httpClient.PostAsJsonAsync("todo", Todo);
+        }
+        else
+        {
+            response = await httpClient.PutAsJsonAsync("todo", Todo);
+        }
+
+        response.EnsureSuccessStatusCode();
+        navigationManager.NavigateTo("todolist");
+    }
+}

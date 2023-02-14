@@ -1,27 +1,81 @@
 ﻿@page "/todolist"
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject IJSRuntime jsRuntime
 
 <h3>TodoList @(todoList.Count(x=> !x.Finished))</h3>
 
-<input @bind="newTodoItemTitle" placeholder="New item ..." />
-<button class="btn btn-primary" @onclick="OnAddClick" >Add</button>
-<ul>
-    @foreach(var todoItem in todoList)
-    {
-        <li><input @bind="todoItem.Title"/> 
-            <input @bind=todoItem.Finished type="checkbox"/> </li>
-    }
-</ul>
+@if (isLoading)
+{
+    <p>Loading ...</p>
+}
+else
+{
+    <button class="btn btn-primary" @onclick="CreateItem">Create</button>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Finished</th>
+                <th>Todo Type</th>
+                <th>Create Date</th>
+                <th>Finish Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var todo in todoList)
+            {
+                <tr>
+                    <td>@todo.Title</td>
+                    <td><input type="checkbox" disabled checked="@todo.Finished" /></td>
+                    <td>@todo.TodoType</td>
+                    <td>@todo.CreateDate</td>
+                    <td>@todo.FinishDate</td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="()=> EditItem(todo)" >Edit</button>
+                        <button class="btn btn-danger" @onclick="()=> DeleteItem(todo)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
 @code {
     private List<TodoListDto> todoList = new ();
-    private string newTodoItemTitle;
+    bool isLoading { get; set; } = true;
 
-    private void OnAddClick()
+    protected override async Task OnInitializedAsync()
     {
-        todoList.Add(new TodoListDto
+        await LoadItemsFromServer();
+        isLoading = false;
+    }
+
+    private async Task LoadItemsFromServer()
+    {
+        todoList = await httpClient.GetFromJsonAsync<List<TodoListDto>>("todo");
+    }
+
+    private void CreateItem()
+    {
+        navigationManager.NavigateTo("todolist/edit");
+    }
+
+    private void EditItem(TodoListDto todo)
+    {
+        navigationManager.NavigateTo($"todolist/edit/{todo.Id}");
+    }
+
+    private async Task DeleteItem(TodoListDto todo)
+    {
+        var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
+        if (confirm)
         {
-            Title = newTodoItemTitle
-        });
-        newTodoItemTitle = null;
+            var response = await httpClient.DeleteAsync($"todo/{todo.Id}");
+            response.EnsureSuccessStatusCode();
+            await LoadItemsFromServer();
+        }
     }
 }
