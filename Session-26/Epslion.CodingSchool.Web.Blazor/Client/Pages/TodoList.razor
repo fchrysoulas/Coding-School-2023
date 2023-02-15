@@ -11,6 +11,10 @@
 }
 else
 {
+    @if(errorMessage != null)
+    {
+        <p class="text-danger">@errorMessage</p>
+    }
     <button class="btn btn-primary" @onclick="CreateItem">Create</button>
 
     <table class="table table-striped table-hover">
@@ -46,6 +50,7 @@ else
 @code {
     private List<TodoListDto> todoList = new ();
     bool isLoading { get; set; } = true;
+    string errorMessage = null;
 
     protected override async Task OnInitializedAsync()
     {
@@ -70,12 +75,20 @@ else
 
     private async Task DeleteItem(TodoListDto todo)
     {
+        errorMessage = null;
         var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
         if (confirm)
         {
             var response = await httpClient.DeleteAsync($"todo/{todo.Id}");
-            response.EnsureSuccessStatusCode();
-            await LoadItemsFromServer();
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadItemsFromServer();
+            }
+            else
+            {
+                errorMessage = await response.Content.ReadAsStringAsync();
+                //await jsRuntime.InvokeVoidAsync("alert", error);
+            }
         }
     }
 }

@@ -44,13 +44,14 @@ public class TodoRepo : IEntityRepo<Todo>
     {
         using var context = new TodoContext();
 
-        var dbTodo = context.Todos.Include(todo => todo.Detail).SingleOrDefault(todo => todo.Id == id);
+        var dbTodo = context.Todos.Include(todo => todo.Detail).Include(todo=> todo.Comments).SingleOrDefault(todo => todo.Id == id);
         if (dbTodo is null)
             throw new KeyNotFoundException($"Given id '{id}' was not found in database");
 
         dbTodo.Title = entity.Title;
         dbTodo.Finished = entity.Finished;
         dbTodo.TodoType = entity.TodoType;
+        dbTodo.Comments = entity.Comments;
 
         if (entity.Finished) entity.Detail.FinishDate = DateTime.Now;
 

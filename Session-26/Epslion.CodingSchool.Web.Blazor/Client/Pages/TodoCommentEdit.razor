@@ -1,0 +1,79 @@
+﻿@page "/todocommentlist/edit/{Id:int?}"
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+
+<h3>TodoCommentEdit</h3>
+
+@if (isLoading)
+{
+    <p>Loading ...</p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <label class="form-label">Text</label>
+            <textarea class="form-control" @bind="@todoComment.Text" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <label class="form-label">Todo</label>
+            <select class="form-control" @bind="todoComment.TodoId">
+                @foreach(var item in todoComment.Todos)
+                {
+                    <option value="@item.Id">@item.Title</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col">
+            <button class="btn btn-success" @onclick="OnSave">Save</button>
+            <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public int? Id { get; set; }
+    bool isLoading = true;
+    TodoCommentEditDto todoComment;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if(Id == null)
+        {
+            todoComment = new();
+            todoComment.Todos = await httpClient.GetFromJsonAsync<List<TodoListDto>>("todo");
+        }
+        else
+        {
+            todoComment = await httpClient.GetFromJsonAsync<TodoCommentEditDto>($"todocomment/{Id}");
+        }
+
+        isLoading = false;
+    }
+
+    private void OnCancel()
+    {
+        navigationManager.NavigateTo("todocommentlist");
+    }
+
+    private async Task OnSave()
+    {
+        HttpResponseMessage? response;
+        if(Id == null)
+        {
+            //CREATE
+            response = await httpClient.PostAsJsonAsync("todocomment", todoComment);
+        }
+        else
+        {
+            response = await httpClient.PutAsJsonAsync("todocomment", todoComment);
+        }
+        response.EnsureSuccessStatusCode();
+        navigationManager.NavigateTo("todocommentlist");
+    }
+}

@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IEntityRepo<Todo>, TodoRepo>();
+builder.Services.AddScoped<IEntityRepo<TodoComment>, TodoCommentRepo>();
 
 var app = builder.Build();
 

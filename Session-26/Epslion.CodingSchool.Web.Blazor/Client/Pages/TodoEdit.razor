@@ -38,7 +38,37 @@ else
 
             </select>
         </div>
+    </div>
 
+    <div class="card mt-2">
+        <div class="card-header">
+            <div>Comments</div>
+            <div class="input-group">
+                <input class="form-control" @bind="@NewCommentText" placeholder="New comment ..."/>
+                <button class="btn btn-success" @onclick="AddComment">+</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-stripped table-hover">
+                <thead>
+                    <tr>
+                        <th style="width:80%">Text</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var comment in Todo.Comments)
+                    {
+                        <tr>
+                            <td><input class="form-control" @bind="@comment.Text" /></td>
+                            <td>
+                                <button class="btn btn-danger" @onclick="()=> DeleteComment(comment)">X</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class="row mt-2">
@@ -54,6 +84,7 @@ else
 @code {
     [Parameter] public int? Id { get; set; }
     TodoEditDto Todo { get; set; }
+    string NewCommentText;
 
     protected override async Task OnInitializedAsync()
     {
@@ -86,5 +117,19 @@ else
 
         response.EnsureSuccessStatusCode();
         navigationManager.NavigateTo("todolist");
+    }
+
+    private void AddComment()
+    {
+        Todo.Comments.Add(new TodoEditCommentDto
+        {
+            Text = NewCommentText
+        });
+        NewCommentText = null;
+    }
+
+    private void DeleteComment(TodoEditCommentDto comment)
+    {
+        Todo.Comments.Remove(comment);
     }
 }

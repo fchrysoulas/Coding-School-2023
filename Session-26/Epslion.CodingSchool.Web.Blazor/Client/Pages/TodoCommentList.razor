@@ -1,0 +1,75 @@
+﻿@page "/todocommentlist"
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject IJSRuntime jsRuntime
+
+<h3>Todo Comment List</h3>
+
+@if (isLoading)
+{
+    <p>Loading ...</p>
+}
+else
+{
+    <button class="btn btn-primary" @onclick="CreateItem">Create</button>
+
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Text</th>
+                <th>Todo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var todoComment in todoComments)
+            {
+                <tr>
+                    <td>@todoComment.Text</td>
+                    <td>@todoComment.TodoTitle</td>
+                    <td>
+                       <button class="btn btn-primary" @onclick="()=> EditItem(todoComment)">Edit</button>
+                       <button class="btn btn-danger" @onclick="()=> DeleteItem(todoComment)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    bool isLoading { get; set; } = true;
+    List<TodoCommentListDto> todoComments = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadItemsFromServer();
+        isLoading = false;
+    }
+
+    private async Task LoadItemsFromServer()
+    {
+        todoComments = await httpClient.GetFromJsonAsync<List<TodoCommentListDto>>("todocomment");
+    }
+
+    private void CreateItem()
+    {
+        navigationManager.NavigateTo("todocommentlist/edit");
+    }
+
+    private void EditItem(TodoCommentListDto comment)
+    {
+        navigationManager.NavigateTo($"todocommentlist/edit/{comment.Id}");
+    }
+
+    private async Task DeleteItem(TodoCommentListDto comment)
+    {
+        var comfirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete comment. Are you sure?");
+        if (comfirm)
+        {
+            var response = await httpClient.DeleteAsync($"todocomment/{comment.Id}");
+            response.EnsureSuccessStatusCode();
+            await LoadItemsFromServer();
+        }
+    }
+}

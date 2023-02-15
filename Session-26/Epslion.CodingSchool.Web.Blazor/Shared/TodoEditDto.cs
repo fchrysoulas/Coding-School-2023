@@ -13,5 +13,14 @@ namespace Epslion.CodingSchool.Web.Blazor.Shared
         public string Title { get; set; }
         public bool Finished { get; set; }
         public TodoType TodoType { get; set; }
+
+        public List<TodoEditCommentDto> Comments { get; set; } = new();
     }
+
+    public class TodoEditCommentDto
+    {
+        public int Id { get; set; }
+        public string Text { get; set; }
+    }
+
 }

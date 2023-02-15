@@ -3,6 +3,7 @@ using Epsilon.CodingSchool.Model;
 using Epslion.CodingSchool.Web.Blazor.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Epslion.CodingSchool.Web.Blazor.Server.Controllers
 {
@@ -41,7 +42,12 @@ namespace Epslion.CodingSchool.Web.Blazor.Server.Controllers
                 Id = id,
                 Title = result.Title,
                 TodoType = result.TodoType,
-                Finished = result.Finished
+                Finished = result.Finished,
+                Comments = result.Comments.Select(comment => new TodoEditCommentDto
+                {
+                    Id = comment.Id,
+                    Text = comment.Text
+                }).ToList()
             };
         }
 
@@ -49,7 +55,11 @@ namespace Epslion.CodingSchool.Web.Blazor.Server.Controllers
         public async Task Post(TodoEditDto todo)
         {
             var newTodo = new Todo(todo.Title);
-            //newTodo.Finished = todo.Finished;
+            foreach(var comment in todo.Comments)
+            {
+                newTodo.Comments.Add(new TodoComment(comment.Text));
+            }
+
             newTodo.TodoType = todo.TodoType;
             _todoRepo.Add(newTodo);
         }
@@ -61,13 +71,30 @@ namespace Epslion.CodingSchool.Web.Blazor.Server.Controllers
             itemToUpdate.Title = todo.Title;
             itemToUpdate.Finished= todo.Finished;
             itemToUpdate.TodoType = todo.TodoType;
+            itemToUpdate.Comments = todo.Comments.Select(comment => new TodoComment(comment.Text)
+            {
+                Id = comment.Id
+            }).ToList();
+
             _todoRepo.Update(todo.Id, itemToUpdate);
         }
 
         [HttpDelete("{id}")]
-        public async Task Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            _todoRepo.Delete(id);
+            try
+            {
+                _todoRepo.Delete(id);
+                return Ok();
+            }
+            catch (DbUpdateException ex)
+            {
+                return BadRequest("This todo cannot be deleted!");
+            }
+            catch(KeyNotFoundException ex)
+            {
+                return BadRequest($"Todo with id {id} not found!");
+            }
         }
     }
 }
