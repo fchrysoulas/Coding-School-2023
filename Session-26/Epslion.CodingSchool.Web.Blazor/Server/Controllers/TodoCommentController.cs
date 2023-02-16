@@ -53,7 +53,7 @@ namespace Epslion.CodingSchool.Web.Blazor.Server.Controllers
         public async Task Post(TodoCommentEditDto todoComment)
         {
             var newTodoComment = new TodoComment(todoComment.Text);
-            newTodoComment.TodoId = todoComment.TodoId;
+            newTodoComment.TodoId = todoComment.TodoId.Value;
             _todoCommentRepo.Add(newTodoComment);
         }
 
@@ -62,7 +62,7 @@ namespace Epslion.CodingSchool.Web.Blazor.Server.Controllers
         {
             var todoCommentToUpdate = _todoCommentRepo.GetById(todoComment.Id);
             todoCommentToUpdate.Text = todoComment.Text;
-            todoCommentToUpdate.TodoId = todoComment.TodoId;
+            todoCommentToUpdate.TodoId = todoComment.TodoId.Value;
 
             _todoCommentRepo.Update(todoComment.Id, todoCommentToUpdate);
         }

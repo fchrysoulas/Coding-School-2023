@@ -10,30 +10,36 @@
 }
 else
 {
-    <div class="row">
-        <div class="col-md-12">
-            <label class="form-label">Text</label>
-            <textarea class="form-control" @bind="@todoComment.Text" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <label class="form-label">Todo</label>
-            <select class="form-control" @bind="todoComment.TodoId">
-                @foreach(var item in todoComment.Todos)
-                {
-                    <option value="@item.Id">@item.Title</option>
-                }
-            </select>
-        </div>
-    </div>
+    <EditForm Model="todoComment" OnValidSubmit="OnSave">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
 
-    <div class="row mt-2">
-        <div class="col">
-            <button class="btn btn-success" @onclick="OnSave">Save</button>
-            <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
+        <div class="row">
+            <div class="col-md-12">
+                <label class="form-label">Text</label>
+                <InputTextArea class="form-control" @bind-Value="@todoComment.Text" />
+            </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label class="form-label">Todo</label>
+                <InputSelect class="form-control" @bind-Value="todoComment.TodoId">
+                    @foreach(var item in todoComment.Todos)
+                    {
+                        <option value="@item.Id">@item.Title</option>
+                    }
+                </InputSelect>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col">
+                <BootstrapButton ButtonType="BootstrapButtonType.Success" IsSubmit="true">Save</BootstrapButton>
+                @*<button class="btn btn-success" type="submit">Save</button>*@
+                <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
+            </div>
+        </div>
+    </EditForm>
 }
 
 @code {
@@ -47,6 +53,7 @@ else
         {
             todoComment = new();
             todoComment.Todos = await httpClient.GetFromJsonAsync<List<TodoListDto>>("todo");
+            todoComment.TodoId = todoComment.Todos.FirstOrDefault()?.Id;
         }
         else
         {

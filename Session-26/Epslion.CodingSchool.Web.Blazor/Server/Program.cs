@@ -1,5 +1,6 @@
 using Epsilon.CodingSchool.EF.Repository;
 using Epsilon.CodingSchool.Model;
+using Epslion.CodingSchool.Web.Blazor.Shared;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);

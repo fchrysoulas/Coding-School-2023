@@ -1,4 +1,5 @@
 using Epslion.CodingSchool.Web.Blazor.Client;
+using Epslion.CodingSchool.Web.Blazor.Shared;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 

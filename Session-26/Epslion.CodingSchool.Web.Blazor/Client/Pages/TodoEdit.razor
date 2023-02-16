@@ -6,7 +6,7 @@
 
 @if(Todo == null)
 {
-    <p>Loading ...</p>
+    <Spinner Type="SpinnerType.Grow" />
 }
 else
 {
@@ -45,7 +45,7 @@ else
             <div>Comments</div>
             <div class="input-group">
                 <input class="form-control" @bind="@NewCommentText" placeholder="New comment ..."/>
-                <button class="btn btn-success" @onclick="AddComment">+</button>
+                <BootstrapButton ButtonType="BootstrapButtonType.Success" OnClick="AddComment">+</BootstrapButton>
             </div>
         </div>
         <div class="card-body">
@@ -62,7 +62,7 @@ else
                         <tr>
                             <td><input class="form-control" @bind="@comment.Text" /></td>
                             <td>
-                                <button class="btn btn-danger" @onclick="()=> DeleteComment(comment)">X</button>
+                                <BootstrapButton ButtonType="BootstrapButtonType.Danger" OnClick="()=> DeleteComment(comment)">X</BootstrapButton>
                             </td>
                         </tr>
                     }
@@ -73,8 +73,8 @@ else
 
     <div class="row mt-2">
         <div class="col">
-            <button class="btn btn-success" @onclick="OnSave">Save</button>
-            <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
+            <BootstrapButton ButtonType="BootstrapButtonType.Success" OnClick="OnSave">Save</BootstrapButton>
+            <BootstrapButton ButtonType="BootstrapButtonType.Danger" OnClick="OnCancel">Cancel</BootstrapButton>
         </div>
 
     </div>
